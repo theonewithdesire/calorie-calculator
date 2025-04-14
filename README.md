@@ -1,4 +1,4 @@
-# 🏋️‍♂️ FitnessGoesDeep - Calorie Calculator
+# 🏋️‍♂️ Calorie Calculator
 
 A sleek, modern calorie calculator built with pure HTML, CSS, and JavaScript - no frameworks needed! 💪
 
