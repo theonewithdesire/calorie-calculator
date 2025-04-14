@@ -45,6 +45,7 @@ body {
     max-width: 500px;
     text-align: center;
     animation: slideUp 0.5s ease-out;
+    margin-bottom: 4rem;
 }
 
 @keyframes slideUp {
@@ -190,6 +191,10 @@ input:focus, select:focus {
     font-size: 0.875rem;
     opacity: 0.8;
     transition: opacity 0.3s ease;
+    background-color: var(--navy);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    z-index: 1000;
 }
 
 .credit-line:hover {
