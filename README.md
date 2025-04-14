@@ -10,12 +10,22 @@ A sleek, modern calorie calculator built with pure HTML, CSS, and JavaScript - n
 - Smooth animations
 - Works offline
 - Mobile-friendly
+- Bilingual support (English/Persian - انگلیسی/فارسی)
+- RTL and LTR layout support
 
 ## 💻 Tech Stack
 
 - Pure HTML5
 - Vanilla CSS3 (with variables and animations)
 - Vanilla JavaScript (no dependencies)
+
+## 🌍 Language Support
+
+- English (Default)
+- Persian (فارسی)
+  - Full RTL (Right-to-Left) support
+  - Persian number formatting
+  - Vazirmatn font for Persian text
 
 ## 🧮 How It Works
 

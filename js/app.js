@@ -1,6 +1,9 @@
 // Global state
 let currentGoal = '';
 
+// Language handling
+let currentLanguage = 'en';
+
 // Utility functions
 function showPage(pageId) {
     document.querySelectorAll('.page').forEach(page => {
@@ -128,7 +131,45 @@ function handleSubmit(event) {
     }
 }
 
-// Initialize the app by showing the welcome page
+// Language handling
+function toggleLanguage() {
+    const html = document.documentElement;
+    currentLanguage = currentLanguage === 'en' ? 'fa' : 'en';
+    html.lang = currentLanguage;
+    html.dir = currentLanguage === 'fa' ? 'rtl' : 'ltr';
+    
+    // Hide all language elements
+    document.querySelectorAll('.en, .fa').forEach(el => {
+        el.style.display = 'none';
+    });
+    
+    // Show current language elements
+    document.querySelectorAll('.' + currentLanguage).forEach(el => {
+        el.style.display = 'inline-block';
+    });
+
+    // Update placeholders for inputs based on language
+    if (currentLanguage === 'fa') {
+        document.getElementById('age').placeholder = 'سن خود را وارد کنید (۱۰-۱۰۰)';
+        document.getElementById('weight').placeholder = 'وزن خود را وارد کنید (۱۰-۳۰۰ کیلوگرم)';
+        document.getElementById('height').placeholder = 'قد خود را وارد کنید (۱۰۰-۳۰۰ سانتی‌متر)';
+        
+        // Update select default options
+        document.querySelector('#gender option[value=""]').textContent = 'جنسیت خود را انتخاب کنید';
+        document.querySelector('#activity option[value=""]').textContent = 'سطح فعالیت خود را انتخاب کنید';
+    } else {
+        document.getElementById('age').placeholder = 'Enter your age (10-100)';
+        document.getElementById('weight').placeholder = 'Enter your weight (10-300 kg)';
+        document.getElementById('height').placeholder = 'Enter your height (100-300 cm)';
+        
+        // Update select default options
+        document.querySelector('#gender option[value=""]').textContent = 'Select your gender';
+        document.querySelector('#activity option[value=""]').textContent = 'Select your activity level';
+    }
+}
+
+// Initialize language on page load
 document.addEventListener('DOMContentLoaded', () => {
     showPage('welcomePage');
+    toggleLanguage(); // Initialize language display
 }); 
