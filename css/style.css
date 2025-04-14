@@ -179,4 +179,32 @@ input:focus, select:focus {
         flex-direction: row;
         justify-content: center;
     }
+}
+
+.credit-line {
+    position: fixed;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--gray);
+    font-size: 0.875rem;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.credit-line:hover {
+    opacity: 1;
+    color: var(--light-blue);
+}
+
+.credit-line .heart {
+    color: var(--light-blue);
+    display: inline-block;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
 } 
