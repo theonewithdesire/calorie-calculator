@@ -154,22 +154,37 @@ function setLanguage(lang) {
 
     // Handle select options visibility and selection
     document.querySelectorAll('select').forEach(select => {
-        // Reset to empty value
-        select.value = '';
-        
-        // Hide all options first
+        let placeholderOption = null;
+
         select.querySelectorAll('option').forEach(option => {
-            if (option.classList.contains(currentLanguage)) {
-                option.style.display = 'block'; // Changed from inline-block to block for select options
+            const optionLang = option.getAttribute('data-lang');
+            option.selected = false; // Deselect all options first
+            
+            if (optionLang === currentLanguage) {
+                option.style.display = ''; // Show option
+                // Check if this is the placeholder for the current language
+                if (option.value === "") {
+                    placeholderOption = option; // Store the placeholder option element
+                }
             } else {
-                option.style.display = 'none';
+                option.style.display = 'none'; // Hide option
             }
         });
 
-        // Select the first option of current language
-        const firstOption = select.querySelector(`option.${currentLanguage}`);
-        if (firstOption) {
-            firstOption.selected = true;
+        // Always reset the select value by selecting the placeholder option for the current language
+        if (placeholderOption !== null) {
+            placeholderOption.selected = true;
+            select.value = placeholderOption.value; // Should be ""
+        } else {
+            // Fallback if placeholder is missing (shouldn't happen with current HTML)
+            // Select the first *actual* option if available
+            const firstActualOption = select.querySelector(`option[data-lang="${currentLanguage}"][value!=""]`);
+            if(firstActualOption) {
+                firstActualOption.selected = true;
+                select.value = firstActualOption.value;
+            } else {
+                 select.value = ''; // Really no options
+            }
         }
     });
 
@@ -210,7 +225,7 @@ function toggleLanguage() {
         // Hide all options of other language
         select.querySelectorAll('option').forEach(option => {
             if (option.classList.contains(currentLanguage)) {
-                option.style.display = 'block';
+                option.style.display = '';
             } else {
                 option.style.display = 'none';
             }
