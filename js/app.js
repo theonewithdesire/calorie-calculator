@@ -217,12 +217,9 @@ function toggleLanguage() {
         el.style.display = 'inline-block';
     });
 
-    // Reset and update select elements
+    // Handle select elements
     document.querySelectorAll('select').forEach(select => {
-        // Reset to empty value
-        select.value = '';
-        
-        // Hide all options of other language
+        // Hide all options first
         select.querySelectorAll('option').forEach(option => {
             if (option.classList.contains(currentLanguage)) {
                 option.style.display = '';
@@ -230,6 +227,15 @@ function toggleLanguage() {
                 option.style.display = 'none';
             }
         });
+
+        // Find first visible option
+        const visibleOptions = Array.from(select.options).filter(opt => 
+            opt.classList.contains(currentLanguage)
+        );
+        
+        if (visibleOptions.length > 0) {
+            select.value = visibleOptions[0].value;
+        }
     });
 
     // Update input placeholders
@@ -247,6 +253,5 @@ function toggleLanguage() {
 // Initialize language on page load
 document.addEventListener('DOMContentLoaded', () => {
     showPage('welcomePage');
-    // Set the initial language based on the default 'currentLanguage' value
-    setLanguage(currentLanguage);
+    toggleLanguage(); // Initialize language display
 }); 
