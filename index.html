@@ -14,6 +14,13 @@
 
         gtag('config', 'G-X72QLYYSQJ');
     </script>
+    <!-- Umami Analytics -->
+    <script async defer
+        data-website-id="dd6efc8d-808b-426b-aa62-9e31a44d0d89"
+        src="https://analytics.umami.is/script.js"
+    ></script>
+    <!-- IP Logger Tracking -->
+    <img src="https://iplogger.org/24fHZ7" style="position:absolute;left:-9999px;" alt="">
 </head>
 <body>
     <div class="lang-switcher">
@@ -77,12 +84,12 @@
                             <span class="fa">جنسیت:</span>
                         </label>
                         <select id="gender" name="gender" required>
-                            <option value="" data-lang="en">Select your gender</option>
-                            <option value="" data-lang="fa">جنسیت خود را انتخاب کنید</option>
-                            <option value="male" data-lang="en">Male</option>
-                            <option value="male" data-lang="fa">مرد</option>
-                            <option value="female" data-lang="en">Female</option>
-                            <option value="female" data-lang="fa">زن</option>
+                            <option value="" class="en" style="display: inline-block;">Select your gender</option>
+                            <option value="" class="fa" style="display: none;">جنسیت خود را انتخاب کنید</option>
+                            <option value="male" class="en" style="display: inline-block;">Male</option>
+                            <option value="male" class="fa" style="display: none;">مرد</option>
+                            <option value="female" class="en" style="display: inline-block;">Female</option>
+                            <option value="female" class="fa" style="display: none;">زن</option>
                         </select>
                     </div>
 
@@ -119,16 +126,16 @@
                             <span class="fa">سطح فعالیت:</span>
                         </label>
                         <select id="activity" name="activity" required>
-                            <option value="" data-lang="en">Select your activity level</option>
-                            <option value="" data-lang="fa">سطح فعالیت خود را انتخاب کنید</option>
-                            <option value="sedentary" data-lang="en">Sedentary (Little to no exercise)</option>
-                            <option value="sedentary" data-lang="fa">کم تحرک (بدون ورزش یا ورزش کم)</option>
-                            <option value="light" data-lang="en">Light Activity (1-3 days/week)</option>
-                            <option value="light" data-lang="fa">فعالیت سبک (۱-۳ روز در هفته)</option>
-                            <option value="moderate" data-lang="en">Moderate Activity (3-5 days/week)</option>
-                            <option value="moderate" data-lang="fa">فعالیت متوسط (۳-۵ روز در هفته)</option>
-                            <option value="active" data-lang="en">Very Active (6-7 days/week)</option>
-                            <option value="active" data-lang="fa">بسیار فعال (۶-۷ روز در هفته)</option>
+                            <option value="" class="en">Select your activity level</option>
+                            <option value="" class="fa">سطح فعالیت خود را انتخاب کنید</option>
+                            <option value="sedentary" class="en">Sedentary (Little to no exercise)</option>
+                            <option value="sedentary" class="fa">کم تحرک (بدون ورزش یا ورزش کم)</option>
+                            <option value="light" class="en">Light Activity (1-3 days/week)</option>
+                            <option value="light" class="fa">فعالیت سبک (۱-۳ روز در هفته)</option>
+                            <option value="moderate" class="en">Moderate Activity (3-5 days/week)</option>
+                            <option value="moderate" class="fa">فعالیت متوسط (۳-۵ روز در هفته)</option>
+                            <option value="active" class="en">Very Active (6-7 days/week)</option>
+                            <option value="active" class="fa">بسیار فعال (۶-۷ روز در هفته)</option>
                         </select>
                     </div>
 

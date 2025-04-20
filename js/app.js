@@ -2,7 +2,7 @@
 let currentGoal = '';
 
 // Language handling
-let currentLanguage = 'en';
+let currentLanguage = 'en'; // Default language
 
 // Utility functions
 function showPage(pageId) {
@@ -131,7 +131,61 @@ function handleSubmit(event) {
     }
 }
 
-// Language handling
+// Function to apply language settings
+function setLanguage(lang) {
+    currentLanguage = lang;
+    const html = document.documentElement;
+    html.lang = currentLanguage;
+    html.dir = currentLanguage === 'fa' ? 'rtl' : 'ltr';
+
+    // Hide all potentially language-specific elements first
+    document.querySelectorAll('.en, .fa').forEach(el => {
+        el.style.display = 'none';
+    });
+
+    // Show elements for the current language
+    document.querySelectorAll('.' + currentLanguage).forEach(el => {
+        // Use appropriate display based on original style or tag type if needed
+        // For simplicity, using 'inline-block' for spans and buttons, 'block' for others might be better
+        // Or revert to original display style if stored previously.
+        // Using inline-block for now as it covers spans used widely.
+        el.style.display = 'inline-block'; 
+    });
+
+    // Handle select options visibility and selection
+    document.querySelectorAll('select').forEach(select => {
+        // Reset to empty value
+        select.value = '';
+        
+        // Hide all options first
+        select.querySelectorAll('option').forEach(option => {
+            if (option.classList.contains(currentLanguage)) {
+                option.style.display = 'block'; // Changed from inline-block to block for select options
+            } else {
+                option.style.display = 'none';
+            }
+        });
+
+        // Select the first option of current language
+        const firstOption = select.querySelector(`option.${currentLanguage}`);
+        if (firstOption) {
+            firstOption.selected = true;
+        }
+    });
+
+    // Update input placeholders
+    if (currentLanguage === 'fa') {
+        document.getElementById('age').placeholder = 'سن خود را وارد کنید (۱۰-۱۰۰)';
+        document.getElementById('weight').placeholder = 'وزن خود را وارد کنید (۱۰-۳۰۰ کیلوگرم)';
+        document.getElementById('height').placeholder = 'قد خود را وارد کنید (۱۰۰-۳۰۰ سانتی‌متر)';
+    } else {
+        document.getElementById('age').placeholder = 'Enter your age (10-100)';
+        document.getElementById('weight').placeholder = 'Enter your weight (10-300 kg)';
+        document.getElementById('height').placeholder = 'Enter your height (100-300 cm)';
+    }
+}
+
+// Function to toggle language
 function toggleLanguage() {
     const html = document.documentElement;
     currentLanguage = currentLanguage === 'en' ? 'fa' : 'en';
@@ -148,29 +202,22 @@ function toggleLanguage() {
         el.style.display = 'inline-block';
     });
 
-    // Handle select options with data-lang attribute
+    // Reset and update select elements
     document.querySelectorAll('select').forEach(select => {
-        // First hide all options
+        // Reset to empty value
+        select.value = '';
+        
+        // Hide all options of other language
         select.querySelectorAll('option').forEach(option => {
-            option.style.display = 'none';
+            if (option.classList.contains(currentLanguage)) {
+                option.style.display = 'block';
+            } else {
+                option.style.display = 'none';
+            }
         });
-        
-        // Only show options for current language
-        const currentLangOptions = select.querySelectorAll(`option[data-lang="${currentLanguage}"]`);
-        currentLangOptions.forEach(option => {
-            option.style.display = '';
-        });
-        
-        // Ensure a proper option is selected
-        if (currentLangOptions.length > 0 && !select.value) {
-            // If no option is selected, select the first one with same value
-            const firstOption = currentLangOptions[0];
-            const value = firstOption.value;
-            select.value = value;
-        }
     });
 
-    // Update placeholders for inputs based on language
+    // Update input placeholders
     if (currentLanguage === 'fa') {
         document.getElementById('age').placeholder = 'سن خود را وارد کنید (۱۰-۱۰۰)';
         document.getElementById('weight').placeholder = 'وزن خود را وارد کنید (۱۰-۳۰۰ کیلوگرم)';
@@ -185,5 +232,6 @@ function toggleLanguage() {
 // Initialize language on page load
 document.addEventListener('DOMContentLoaded', () => {
     showPage('welcomePage');
-    toggleLanguage(); // Initialize language display
+    // Set the initial language based on the default 'currentLanguage' value
+    setLanguage(currentLanguage);
 }); 
