@@ -148,23 +148,37 @@ function toggleLanguage() {
         el.style.display = 'inline-block';
     });
 
+    // Handle select options with data-lang attribute
+    document.querySelectorAll('select').forEach(select => {
+        // First hide all options
+        select.querySelectorAll('option').forEach(option => {
+            option.style.display = 'none';
+        });
+        
+        // Only show options for current language
+        const currentLangOptions = select.querySelectorAll(`option[data-lang="${currentLanguage}"]`);
+        currentLangOptions.forEach(option => {
+            option.style.display = '';
+        });
+        
+        // Ensure a proper option is selected
+        if (currentLangOptions.length > 0 && !select.value) {
+            // If no option is selected, select the first one with same value
+            const firstOption = currentLangOptions[0];
+            const value = firstOption.value;
+            select.value = value;
+        }
+    });
+
     // Update placeholders for inputs based on language
     if (currentLanguage === 'fa') {
         document.getElementById('age').placeholder = 'سن خود را وارد کنید (۱۰-۱۰۰)';
         document.getElementById('weight').placeholder = 'وزن خود را وارد کنید (۱۰-۳۰۰ کیلوگرم)';
         document.getElementById('height').placeholder = 'قد خود را وارد کنید (۱۰۰-۳۰۰ سانتی‌متر)';
-        
-        // Update select default options
-        document.querySelector('#gender option[value=""]').textContent = 'جنسیت خود را انتخاب کنید';
-        document.querySelector('#activity option[value=""]').textContent = 'سطح فعالیت خود را انتخاب کنید';
     } else {
         document.getElementById('age').placeholder = 'Enter your age (10-100)';
         document.getElementById('weight').placeholder = 'Enter your weight (10-300 kg)';
         document.getElementById('height').placeholder = 'Enter your height (100-300 cm)';
-        
-        // Update select default options
-        document.querySelector('#gender option[value=""]').textContent = 'Select your gender';
-        document.querySelector('#activity option[value=""]').textContent = 'Select your activity level';
     }
 }
 
